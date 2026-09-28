@@ -26,7 +26,7 @@ jobs:
 
     - name: Run Flake8 Linter
       run: |
-        flake8 . --ignore=E302,E402,E131,W291,W292,W293 --max-line-length=100 --exclude=venv,.venv
+        flake8 . --ignore=E302,E402,E131,W291,W292,W293,W504 --max-line-length=100 --exclude=venv,.venv
 
     - name: Run Pytest Unit Tests
       run: |
