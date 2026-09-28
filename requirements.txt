@@ -3,3 +3,4 @@ Werkzeug==3.0.1
 flask-cors
 pytest
 flake8
+gunicorn
