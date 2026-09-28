@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CourseDash: Course Management & Tracking Platform</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <meta property="og:image" content="https://bolt.new/static/og_default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
+</head>
+  <body>
+    <header class="app-header">
+      <h1>CourseDash: Course Management & Tracking Platform</h1>
+      <p>Track, manage, and complete your learning goals — all in one place.</p>
+    </header>
+
+    <main class="container">
+      <!-- Add Course Form -->
+      <section class="panel" aria-labelledby="form-title">
+        <h2 class="panel-title" id="form-title">Add a New Course</h2>
+        <form id="course-form" novalidate>
+          <div class="form-grid">
+            <div class="field full">
+              <label for="f-name">Course Name<span class="req">*</span></label>
+              <input id="f-name" name="name" type="text" placeholder="e.g. Advanced JavaScript" />
+              <span class="field-error">Course name is required.</span>
+            </div>
+            <div class="field full">
+              <label for="f-description">Description<span class="req">*</span></label>
+              <textarea id="f-description" name="description" placeholder="What will you learn?"></textarea>
+              <span class="field-error">Description is required.</span>
+            </div>
+            <div class="field">
+              <label for="f-target_date">Target Date<span class="req">*</span></label>
+              <input id="f-target_date" name="target_date" type="date" />
+              <span class="field-error">Target date is required.</span>
+            </div>
+            <div class="field">
+              <label for="f-status">Status<span class="req">*</span></label>
+              <select id="f-status" name="status">
+                <option value="Not Started">Not Started</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+              </select>
+              <span class="field-error">Status is required.</span>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost" id="reset-btn">Reset</button>
+            <button type="submit" class="btn btn-primary" id="submit-btn">Add Course</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Course List -->
+      <section class="panel" aria-labelledby="list-title">
+        <div class="toolbar">
+          <h2 class="panel-title" id="list-title" style="margin-bottom:0;">Your Courses</h2>
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <span class="count-badge" id="count-badge"></span>
+            <button class="btn btn-sm refresh-btn" id="refresh-btn">Refresh</button>
+          </div>
+        </div>
+        <div id="course-list"></div>
+      </section>
+    </main>
+
+    <!-- Edit Modal -->
+    <div class="modal-overlay" id="edit-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 id="modal-title">Edit Course</h2>
+          <button class="close-x" id="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <form id="edit-form" novalidate>
+          <div class="modal-body">
+            <input type="hidden" name="id" id="e-id" />
+            <div class="form-grid">
+              <div class="field full">
+                <label for="e-name">Course Name<span class="req">*</span></label>
+                <input id="e-name" name="name" type="text" />
+                <span class="field-error">Course name is required.</span>
+              </div>
+              <div class="field full">
+                <label for="e-description">Description<span class="req">*</span></label>
+                <textarea id="e-description" name="description"></textarea>
+                <span class="field-error">Description is required.</span>
+              </div>
+              <div class="field">
+                <label for="e-target_date">Target Date<span class="req">*</span></label>
+                <input id="e-target_date" name="target_date" type="date" />
+                <span class="field-error">Target date is required.</span>
+              </div>
+              <div class="field">
+                <label for="e-status">Status<span class="req">*</span></label>
+                <select id="e-status" name="status">
+                  <option value="Not Started">Not Started</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Completed">Completed</option>
+                </select>
+                <span class="field-error">Status is required.</span>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-ghost" id="edit-cancel">Cancel</button>
+            <button type="submit" class="btn btn-success" id="edit-save">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="script.js"></script>
+  
+  </body>
+</html>
